@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const articleRoutes = require('./routes/articles.js');
 
 
 
@@ -13,6 +14,13 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-type, Authorization');
     next();
 });
+
+// app.use((req, res, next) => {
+//     res.send('Helo World');
+//     next();
+// })
+
+app.use('/articles', articleRoutes);
 
 
 
