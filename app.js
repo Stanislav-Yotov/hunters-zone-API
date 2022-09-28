@@ -1,10 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const articleRoutes = require('./routes/articles.js');
+const mongoose = require('mongoose');
 
 
 
 const app = express();
+
+const PORT = process.env.PORT || 8000;
+
+
 
 app.use(bodyParser.json());
 
@@ -15,16 +20,18 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use((req, res, next) => {
-//     res.send('Helo World');
-//     next();
-// })
-
 app.use('/articles', articleRoutes);
 
 
 
 
+mongoose.connect(MONGODB_URI)
+    .then(result => {
+        app.listen(PORT)
+        console.log('connected to DB');
+    })
+    .catch(err => {
+        console.log(err);
+    });
 
 
-app.listen(8000)
