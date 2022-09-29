@@ -18,11 +18,13 @@ router.post('/signup', [
         .normalizeEmail(),
     body('password')
         .trim()
-        .isLength({ min: 5 }),
+        .isLength({ min: 5 })
+        .withMessage('Please enter a valid password'),
     body('userName')
         .trim()
         .not()
         .isEmpty()
+        .withMessage('please enter a valid username')
 ], authController.signup);
 
 module.exports = router;
